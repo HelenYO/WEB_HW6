@@ -1,4 +1,3 @@
-<#-- @ftlvariable name="users" type="ru.itmo.webmail.model.domain.User[]" -->
 <#import "common.ftl" as c>
 
 <@c.page>
@@ -24,6 +23,7 @@
     <tr>
         <td class="id">{{#}}</td>
         <td class="login">{{login}}</td>
+
         <td class="rating"></td>
     </tr>
 </template>
