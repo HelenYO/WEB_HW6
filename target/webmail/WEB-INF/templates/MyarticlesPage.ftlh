@@ -46,26 +46,41 @@
                     } else {
                         $tr.find(".switchHidden").attr("value", "Hide");
                     }
-                    $tbody.append($tr);
-                    $(function() {
-                        $(".datatable.articles").on("click", ".switchHidden", function () {
-                            var button = $(this);
-                            var articleId = article.id;
-                            var hideOld = this.value;
-                            button.attr("disabled", "");
-                            $.post("", {action: "switchHidden", articleId : articleId}, function (response) {
-                                if (response["success"]) {
-                                    if (hideOld === "Hide") {
-                                        button.attr("value", "Show");
-                                    } else {
-                                        button.attr("value", "Hide");
-                                    }
+                    var button = $tr.find(".switchHidden");
+                    var articleId = $tr.find(".id").text();
+                    var hideOld = $tr.find(".switchHidden").value;
+                    $tr.find(".switchHidden").click( function () {
+                        button.attr("disabled", "");
+                        $.post("", {action: "switchHidden", articleId : articleId}, function (response) {
+                            if (response["success"]) {
+                                if (hideOld === "Hide") {
+                                    button.attr("value", "Show");
+                                } else {
+                                    button.attr("value", "Hide");
                                 }
-                                button.removeAttr("disabled");
-                            });
-                            return false;
+                            }
+                            button.removeAttr("disabled");
                         });
-                    })
+                        return false;
+                    });
+                    $tbody.append($tr);
+//                    $(".datatable.articles").on("click", ".switchHidden", function () {
+//                        var button = $(this);
+//                        var articleId = $(this).parent().parent().parent().find(".id").html();
+//                        var hideOld = this.value;
+//                        button.attr("disabled", "");
+//                        $.post("", {action: "switchHidden", articleId : articleId}, function (response) {
+//                            if (response["success"]) {
+//                                if (hideOld === "Hide") {
+//                                    button.attr("value", "Show");
+//                                } else {
+//                                    button.attr("value", "Hide");
+//                                }
+//                            }
+//                            button.removeAttr("disabled");
+//                        });
+//                        return false;
+//                    });
                 });
             } else {
                 $noData.text("No data");
